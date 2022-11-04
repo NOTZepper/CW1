@@ -1,5 +1,5 @@
 import java.io.*;
-import java.security.InvalidKeyException;
+//import java.security.InvalidKeyException;
 import java.util.Scanner;
 
 public class Menu {
@@ -14,7 +14,7 @@ public class Menu {
 
         System.out.print("\nWhat would you like to do?"     //"\n" = new line/next line
                         + "\n1. Add a Song to the Playlist" + "\n2. Remove a Song from the Playlist"
-                        + "\n3. View Playlist" + "\n4. View Playlist by number of play count" + "\nSelection");
+                        + "\n3. View Playlist" + "\n4. View Playlist by number of play count" + "\nSelection: ");
         input = scan.nextInt();
         System.out.print("\n");
 
@@ -51,24 +51,24 @@ public class Menu {
     public void addSong()
 	{
 		Song newSong = new Song(null, null, 0);
-		
-		
-        newSong.setTitle(scan.nextLine());                  // Sets title 
-		System.out.print("Enter title: ");              //Asking for a title input
-		newSong.setArtist(scan.nextLine());                 //sets artist
-		System.out.print("Enter artist: ");     
-	    newSong.setPlaycount(scan.nextLine());
 
-        do {
-            try{
-                System.out.print("Enter play count: ");
-                newSong.setPlaycount(scan.next());
-            }
-            catch (InvalidKeyException invalidPlaycount) {
-                System.out.print(invalidPlaycount.toString());
-                System.out.print("Enter Playcount as numbers \n");
-            }
-        }while (newSong.getPlaycount() = null);
+		newSong.setTitle(scan.nextLine());
+		System.out.print("Enter title: ");              //Asking for a title input
+        newSong.setTitle(scan.nextLine());                  // Sets title
+		System.out.print("Enter artist: ");     
+        newSong.setArtist(scan.nextLine());                 //sets artist
+	  //  newSong.setPlaycount(scan.nextLine());
+
+     //   do {
+      //      try{
+      //          System.out.print("Enter play count: ");
+      //          newSong.setPlaycount(scan.next());
+      //      }
+      //      catch (InvalidKeyException invalidPlaycount) {
+      //          System.out.print(invalidPlaycount.toString());
+      //          System.out.print("Enter Playcount as numbers \n");
+      //      }
+      //  }while (newSong.getPlaycount() = null);
 
         playlist.addSong(newSong);                          // saves song to playlist
     }
@@ -80,7 +80,7 @@ public class Menu {
 			{
 				System.out.print("\n#" + (i+1) + " ");          // new line starts with "#" for number followed by the number of the song (call it "song id" if you want)
 				System.out.print("\""+ playlist.getTitle(i) + "\"");     
-				System.out.print("-" +playlist.getArtist(i)+ "" + ", ");
+				System.out.print(" -" +playlist.getArtist(i)+ "" + ", ");
 				System.out.print(playlist.getPlaycount(i));
 			}
 			System.out.print("\n");

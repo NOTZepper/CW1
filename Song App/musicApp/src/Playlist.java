@@ -24,7 +24,7 @@ public class Playlist implements Serializable {
         return playlist.get(index).getArtist();
     }
 
-    public int getPlaycount(int index) {
+    public String getPlaycount(int index) {
         return playlist.get(index).getPlaycount();
     }
 

@@ -1,5 +1,4 @@
 import java.io.*;
-//import java.security.InvalidKeyException;
 import java.util.Scanner;
 
 public class Menu {
@@ -50,26 +49,15 @@ public class Menu {
     //Song creation
     public void addSong()
 	{
-		Song newSong = new Song(null, null, 0);
+		Song newSong = new Song(null, null, null);
 
 		newSong.setTitle(scan.nextLine());
 		System.out.print("Enter title: ");              //Asking for a title input
         newSong.setTitle(scan.nextLine());                  // Sets title
 		System.out.print("Enter artist: ");     
         newSong.setArtist(scan.nextLine());                 //sets artist
-	  //  newSong.setPlaycount(scan.nextLine());
-
-     //   do {
-      //      try{
-      //          System.out.print("Enter play count: ");
-      //          newSong.setPlaycount(scan.next());
-      //      }
-      //      catch (InvalidKeyException invalidPlaycount) {
-      //          System.out.print(invalidPlaycount.toString());
-      //          System.out.print("Enter Playcount as numbers \n");
-      //      }
-      //  }while (newSong.getPlaycount() = null);
-
+        System.out.print("Enter play count: ");
+        newSong.setPlaycount(scan.next());
         playlist.addSong(newSong);                          // saves song to playlist
     }
 
@@ -105,6 +93,7 @@ public class Menu {
             }
         } while(flag == false );
     }
+
 
     public void loadPlaylist()
 	{

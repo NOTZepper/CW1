@@ -4,9 +4,9 @@ public class Song implements Serializable
 {
 	private String title;
 	private String artist;
-	private String playcount;
+	private int playcount;
 
-    public Song(String title, String artist, String playcount) {
+    public Song(String title, String artist, int playcount) {
         this.title = title;
         this.artist = artist;
         this.playcount = playcount;
@@ -28,11 +28,15 @@ public class Song implements Serializable
         return this.artist;
     }
 
-    public void setPlaycount(String string) {
-        this.playcount = string;
+    public void setPlaycount(int playcount) throws InvalidPlaycountException {
+        if(playcount > 0)
+        {
+            this.playcount = playcount;
+        }
+        
     }
 
-    public String getPlaycount() {
+    public int getPlaycount() {
         return this.playcount;
         
     }

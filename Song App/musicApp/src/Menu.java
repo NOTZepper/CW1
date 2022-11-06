@@ -1,5 +1,5 @@
 import java.io.*;
-import java.util.Scanner;
+import java.util.*;
 
 public class Menu {
     
@@ -40,6 +40,11 @@ public class Menu {
             runMenu();
             break;
 
+			case 4:
+			viewByPlaycount(input);
+			runMenu();
+			break;
+
             default:
 			System.out.println("\nThat is not a valid selection!\n");
 			runMenu();
@@ -49,16 +54,30 @@ public class Menu {
     //Song creation
     public void addSong()
 	{
-		Song newSong = new Song(null, null, null);
+		Song newSong = new Song(null, null, (Integer) 0);
 
 		newSong.setTitle(scan.nextLine());
 		System.out.print("Enter title: ");              //Asking for a title input
         newSong.setTitle(scan.nextLine());                  // Sets title
 		System.out.print("Enter artist: ");     
         newSong.setArtist(scan.nextLine());                 //sets artist
-        System.out.print("Enter play count: ");
-        newSong.setPlaycount(scan.next());
+		boolean flag = false;
+        do
+		{	
+			try
+			{
+				System.out.print("Playcount: ");
+				newSong.setPlaycount(scan.nextInt());
+				flag = true;
+			}
+			catch (InvalidPlaycountException invalidPlaycount)
+			{
+				System.out.print(invalidPlaycount.toString());
+			}
+		} while(flag == false);
         playlist.addSong(newSong);                          // saves song to playlist
+		System.out.print("\nSong Added!");
+		System.out.print("\n");
     }
 
 
@@ -73,6 +92,19 @@ public class Menu {
 			}
 			System.out.print("\n");
     }
+
+	public void viewByPlaycount(int playcount) {
+		System.out.print("Type the play count of the song: ");
+		playcount = scan.nextInt();
+		ArrayList<Song> songs = playlist.getSongsByPlaycount(playcount);
+		for(int i = 0; i < songs.size(); i++) {
+			System.out.print("\n#" + (i+1) + " ");          // new line starts with "#" for number followed by the number of the song (call it "song id" if you want)
+			System.out.print("\""+ songs.get(i).getTitle() + "\"");     
+			System.out.print(" -" +songs.get(i).getArtist()+ "" + ", ");
+			System.out.print(songs.get(i).getPlaycount());
+			System.out.print("\n");
+		}
+	}
 
 
     public void removeSong() {

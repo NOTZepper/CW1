@@ -4,7 +4,8 @@ import java.io.*;
 public class Playlist implements Serializable {
     private ArrayList<Song> playlist;
 
-    public Playlist() {
+    //Setting up the playlist as an arraylist containing the song title, artis and play count
+    public Playlist() {                         
         playlist = new ArrayList<Song>();
     }
 
@@ -24,11 +25,8 @@ public class Playlist implements Serializable {
         return playlist.get(index).getArtist();
     }
 
-    /***
-     * Returns the play count of the song at the given index
-     * @param index
-     * @return
-     */
+    
+    //Returns the play count of the song at the given index
     public int getPlaycount(int index) {
         return playlist.get(index).getPlaycount(); 
     }
@@ -37,15 +35,12 @@ public class Playlist implements Serializable {
         playlist.remove(index);
     }
 
-    /***
-    * Returns all songs with play count higher than the given play count
-    * @param minPlayCount
-    * @return
-    */
+   
+    //Returns all songs with play counts higher than the given play count
+    
     public ArrayList<Song> getSongsByPlaycount(int minPlayCount) {
         ArrayList<Song> clone = (ArrayList<Song>) playlist.clone();
         clone.removeIf(song -> song.getPlaycount() < minPlayCount);
         return clone;
     }
-    
 }

@@ -6,11 +6,19 @@ public class Menu {
     private Scanner scan = new Scanner(System.in);
     private Playlist playlist = new Playlist();
 
-
-    
+    //loading the menu with selection options
     public int showMenu() {
-        int input; 
+		System.out.print("\n");
+		System.out.print("\n=====================");
+		System.out.print("\nAUTHOR: Fudail Khan");
+		System.out.print("\nStudent ID: 22124816");
+		System.out.print("\n=====================");
+		System.out.print("\n");
+		System.out.print("\n");
+		System.out.print("Press \"Enter\" to begin");
+		scan.nextLine();
 
+        int input;
         System.out.print("\nWhat would you like to do?"     //"\n" = new line/next line
                         + "\n1. Add a Song to the Playlist" + "\n2. Remove a Song from the Playlist"
                         + "\n3. View Playlist" + "\n4. View Playlist by number of play count" + "\nSelection: ");
@@ -20,6 +28,7 @@ public class Menu {
         return input; //returns the input
     }
 
+	//creating the options as cases
     public void runMenu() {
        int input = showMenu();
         switch (input) {
@@ -57,10 +66,10 @@ public class Menu {
 		Song newSong = new Song(null, null, (Integer) 0);
 
 		newSong.setTitle(scan.nextLine());
-		System.out.print("Enter title: ");              //Asking for a title input
-        newSong.setTitle(scan.nextLine());                  // Sets title
+		System.out.print("Enter title: ");              		//Asking for a title input
+        newSong.setTitle(scan.nextLine());                  	// Sets title
 		System.out.print("Enter artist: ");     
-        newSong.setArtist(scan.nextLine());                 //sets artist
+        newSong.setArtist(scan.nextLine());                 	//sets artist
 		boolean flag = false;
         do
 		{	
@@ -75,12 +84,13 @@ public class Menu {
 				System.out.print(invalidPlaycount.toString());
 			}
 		} while(flag == false);
-        playlist.addSong(newSong);                          // saves song to playlist
+        playlist.addSong(newSong);                          	// saves song to playlist
 		System.out.print("\nSong Added!");
 		System.out.print("\n");
     }
 
 
+	//Viewing/Printing the playlist
     public void viewPlaylist() {
 
         for(int i = 0; i < playlist.getPlaylistSize(); i++)     //"PlaylistSize" = number of songs in the playlist
@@ -90,9 +100,10 @@ public class Menu {
 				System.out.print(" -" +playlist.getArtist(i)+ "" + ", ");
 				System.out.print(playlist.getPlaycount(i));
 			}
-			System.out.print("\n");
     }
 
+
+	//Viewing/Printing hte playlist by a given playcount
 	public void viewByPlaycount(int playcount) {
 		System.out.print("Type the play count of the song: ");
 		playcount = scan.nextInt();
@@ -106,7 +117,7 @@ public class Menu {
 		}
 	}
 
-
+	//Removing songs from playlist
     public void removeSong() {
 
         viewPlaylist();
@@ -114,8 +125,9 @@ public class Menu {
         do {
             System.out.print("\nSelect a song to remove: ");
             int removeSong = scan.nextInt();
+			System.out.print("\nSong removed!");
 
-            if(removeSong < playlist.getPlaylistSize() || removeSong > playlist.getPlaylistSize())
+            if( removeSong > playlist.getPlaylistSize())
             {
                 System.out.print("That is not a valid Selection");
             }
@@ -132,17 +144,16 @@ public class Menu {
 		try
 		{
 			FileInputStream fileInputStream = new FileInputStream("playlist");
-			
-			ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-				
-			playlist = (Playlist)objectInputStream.readObject();
-				
+			ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);	
+			playlist = (Playlist)objectInputStream.readObject();			
 			objectInputStream.close();
 		}
+
 		catch(FileNotFoundException fnfException)
 		{
 			System.out.println("No File");
 		}
+		
 		catch(IOException ioException)
 		{	
 			System.out.println("IO no good");
@@ -155,17 +166,14 @@ public class Menu {
 		
 	}
 
-
+	//Saving entered data to the playlist and saving them as songs
     public void savePlaylist()
 	{
 		try
 		{
 			FileOutputStream fileOutputStream = new FileOutputStream("playlist");
-			
 			ObjectOutputStream outObjectStream = new ObjectOutputStream(fileOutputStream);
-			
 			outObjectStream.writeObject(playlist);
-			
 			outObjectStream.flush();
 			outObjectStream.close();
 		}
